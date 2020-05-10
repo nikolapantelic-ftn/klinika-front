@@ -29,7 +29,7 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Button Background="{x:Null}">
+                <Button Background="{x:Null}" Command="{Binding GoToScheduleExamination}">
                     <StackPanel>
                         <Image Source="../Resources/examicon.png" Height="80" Width="80" />
                         <Label Content="Zakaži pregled" FontSize="16" HorizontalContentAlignment="Center"/>
