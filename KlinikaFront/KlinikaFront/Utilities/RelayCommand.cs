@@ -14,11 +14,7 @@ namespace KlinikaFront.Utilities
 
         public RelayCommand(Action<T> execute, Predicate<T> canExecute)
         {
-            if (execute == null)
-            {
-                throw new ArgumentNullException();
-            }
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException();
             _canExecute = canExecute;
         }
 
@@ -57,11 +53,7 @@ namespace KlinikaFront.Utilities
 
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
-            if (execute == null)
-            {
-                throw new ArgumentNullException();
-            }
-            _execute = execute;
+            _execute = execute ?? throw new ArgumentNullException();
             _canExecute = canExecute;
         }
 

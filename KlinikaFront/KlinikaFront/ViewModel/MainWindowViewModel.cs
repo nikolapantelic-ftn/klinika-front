@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KlinikaFront.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,12 +46,12 @@ namespace KlinikaFront.ViewModel
             CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
 
-        private void OnGo1Screen(object obj)
+        private void OnGoToIndexScreen(object obj)
         {
             ChangeViewModel(PageViewModels[0]);
         }
 
-        private void OnGo2Screen(object obj)
+        private void OnGoToMainScreen(object obj)
         {
             ChangeViewModel(PageViewModels[1]);
         }
@@ -62,8 +63,8 @@ namespace KlinikaFront.ViewModel
 
             CurrentPageViewModel = PageViewModels[0];
 
-            Mediator.Subscribe("GoTo1Screen", OnGo1Screen);
-            Mediator.Subscribe("GoTo2Screen", OnGo2Screen);
+            Mediator.Subscribe("GoToIndexScreen", OnGoToIndexScreen);
+            Mediator.Subscribe("GoToMainScreen", OnGoToMainScreen);
         }
     }
 }
