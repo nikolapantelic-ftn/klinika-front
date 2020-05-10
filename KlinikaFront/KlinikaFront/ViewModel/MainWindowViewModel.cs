@@ -51,8 +51,14 @@ namespace KlinikaFront.ViewModel
             ChangeViewModel(PageViewModels[0]);
         }
 
-        private void OnGoToMainScreen(object obj)
+        private void OnGoToLoginScreen(object obj)
         {
+            ChangeViewModel(PageViewModels[2]);
+        }
+
+        private void OnLogin(object obj)
+        {
+            //TO-DO: Logging in
             ChangeViewModel(PageViewModels[1]);
         }
 
@@ -60,11 +66,13 @@ namespace KlinikaFront.ViewModel
         {
             PageViewModels.Add(new IndexViewModel());
             PageViewModels.Add(new MainViewModel());
+            PageViewModels.Add(new LoginViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe("GoToIndexScreen", OnGoToIndexScreen);
-            Mediator.Subscribe("GoToMainScreen", OnGoToMainScreen);
+            Mediator.Subscribe("GoToLoginScreen", OnGoToLoginScreen);
+            Mediator.Subscribe("Login", OnLogin);
         }
     }
 }

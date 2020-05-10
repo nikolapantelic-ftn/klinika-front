@@ -11,5 +11,8 @@
         <DataTemplate DataType="{x:Type viewmodel:MainViewModel}">
             <view:Main />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:LoginViewModel}">
+            <view:LoginScreen />
+        </DataTemplate>
     </Application.Resources>
 </Application>

@@ -8,16 +8,17 @@ using System.Windows.Input;
 
 namespace KlinikaFront.ViewModel
 {
-    class IndexViewModel : BaseViewModel, IPageViewModel
+    class LoginViewModel : BaseViewModel, IPageViewModel
     {
-        private ICommand _goToLogin;
-        public ICommand GoToLogin
+        private ICommand _login;
+
+        public ICommand Login
         {
             get
             {
-                return _goToLogin ?? (_goToLogin = new RelayCommand(x =>
+                return _login ?? (_login = new RelayCommand(x =>
                 {
-                    Mediator.Notify("GoToLoginScreen", "");
+                    Mediator.Notify("Login", "");
                 }));
             }
         }
