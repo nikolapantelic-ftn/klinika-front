@@ -73,6 +73,7 @@ namespace KlinikaFront.ViewModel
             Mediator.Subscribe("GoToIndexScreen", OnGoToIndexScreen);
             Mediator.Subscribe("GoToLoginScreen", OnGoToLoginScreen);
             Mediator.Subscribe("Login", OnLogin);
+
         }
     }
 }

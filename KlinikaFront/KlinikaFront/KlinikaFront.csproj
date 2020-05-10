@@ -133,7 +133,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
-    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\examicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\menuicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\questionicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\scheduleicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\therapyicon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

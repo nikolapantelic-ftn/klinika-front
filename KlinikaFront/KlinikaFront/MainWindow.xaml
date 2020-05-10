@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KlinikaFront"
         mc:Ignorable="d"
-        Title="Klinika" Height="853" Width="480">
+        Title="Klinika" Height="853" Width="496">
     <Grid>
         <ContentControl Content="{Binding CurrentPageViewModel}"/>
     </Grid>
