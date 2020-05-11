@@ -10,6 +10,7 @@ namespace KlinikaFront.ViewModel
     class MainWindowViewModel : BaseViewModel
     {
         private IPageViewModel _currentPageViewModel;
+        private IPageViewModel PreviousPageViewModel { get; set; }
         private List<IPageViewModel> _pageViewModels;
 
         public List<IPageViewModel> PageViewModels
@@ -43,6 +44,7 @@ namespace KlinikaFront.ViewModel
             {
                 PageViewModels.Add(viewModel);
             }
+            PreviousPageViewModel = CurrentPageViewModel;
             CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
 
@@ -56,10 +58,25 @@ namespace KlinikaFront.ViewModel
             ChangeViewModel(PageViewModels[2]);
         }
 
+        private void OnGoToScheduleExaminationScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[3]);
+        }
+
+        private void OnGoToExaminationsScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[4]);
+        }
+
         private void OnLogin(object obj)
         {
             //TO-DO: Logging in
             ChangeViewModel(PageViewModels[1]);
+        }
+
+        private void OnGoToPreviousScreen(object obj)
+        {
+            ChangeViewModel(PreviousPageViewModel);
         }
 
         public MainWindowViewModel()
@@ -67,11 +84,16 @@ namespace KlinikaFront.ViewModel
             PageViewModels.Add(new IndexViewModel());
             PageViewModels.Add(new MainViewModel());
             PageViewModels.Add(new LoginViewModel());
+            PageViewModels.Add(new ScheduleExaminationViewModel());
+            PageViewModels.Add(new ExaminationsViewModel());
 
             CurrentPageViewModel = PageViewModels[0];
 
             Mediator.Subscribe("GoToIndexScreen", OnGoToIndexScreen);
             Mediator.Subscribe("GoToLoginScreen", OnGoToLoginScreen);
+            Mediator.Subscribe("GoToPreviousScreen", OnGoToPreviousScreen);
+            Mediator.Subscribe("GoToScheduleExaminationScreen", OnGoToScheduleExaminationScreen);
+            Mediator.Subscribe("GoToExaminationsScreen", OnGoToExaminationsScreen);
             Mediator.Subscribe("Login", OnLogin);
 
         }

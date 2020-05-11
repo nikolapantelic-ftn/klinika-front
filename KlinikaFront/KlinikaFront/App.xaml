@@ -14,5 +14,11 @@
         <DataTemplate DataType="{x:Type viewmodel:LoginViewModel}">
             <view:LoginScreen />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ScheduleExaminationViewModel}">
+            <view:ScheduleExamination />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ExaminationsViewModel}">
+            <view:Examinations />
+        </DataTemplate>
     </Application.Resources>
 </Application>

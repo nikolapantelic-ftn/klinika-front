@@ -35,7 +35,7 @@
                         <Label Content="Zakaži pregled" FontSize="16" HorizontalContentAlignment="Center"/>
                     </StackPanel>
                 </Button>
-                <Button Grid.Column="1" Background="{x:Null}">
+                <Button Grid.Column="1" Background="{x:Null}" Command="{Binding GoToExaminations}">
                     <StackPanel>
                         <Image Source="../Resources/scheduleicon.png" Height="74" Width="74" />
                         <Label Content="Pregledi" FontSize="16" HorizontalContentAlignment="Center"/>

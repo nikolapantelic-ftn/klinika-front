@@ -13,6 +13,8 @@ namespace KlinikaFront.ViewModel
         private ICommand _goToIndex;
         private ICommand _toggleMenu;
         private ICommand _goToLogin;
+        private ICommand _goToScheduleExamination;
+        private ICommand _goToExaminations;
         public bool MenuOpened { get; set; } = false;
 
         public ICommand GoToIndex
@@ -22,6 +24,7 @@ namespace KlinikaFront.ViewModel
                 return _goToIndex ?? (_goToIndex = new RelayCommand(x =>
                 {
                     Mediator.Notify("GoToIndexScreen", "");
+                    MenuOpened = false;
                 }));
             }
         }
@@ -44,6 +47,30 @@ namespace KlinikaFront.ViewModel
                 return _goToLogin ?? (_goToLogin = new RelayCommand(x =>
                 {
                     Mediator.Notify("GoToLoginScreen", "");
+                    MenuOpened = false;
+                }));
+            }
+        }
+
+        public ICommand GoToScheduleExamination
+        {
+            get
+            {
+                return _goToScheduleExamination ?? (_goToScheduleExamination = new RelayCommand(x =>
+                {
+                    Mediator.Notify("GoToScheduleExaminationScreen", "");
+                    MenuOpened = false;
+                }));
+            }
+        }
+
+        public ICommand GoToExaminations
+        {
+            get
+            {
+                return _goToExaminations ?? (_goToExaminations = new RelayCommand(x =>
+                {
+                    Mediator.Notify("GoToExaminationsScreen", "");
                     MenuOpened = false;
                 }));
             }
