@@ -11,6 +11,7 @@ namespace KlinikaFront.ViewModel
     class LoginViewModel : BaseViewModel, IPageViewModel
     {
         private ICommand _login;
+        private ICommand _goToRegistration;
 
         public ICommand Login
         {
@@ -19,6 +20,17 @@ namespace KlinikaFront.ViewModel
                 return _login ?? (_login = new RelayCommand(x =>
                 {
                     Mediator.Notify("Login", "");
+                }));
+            }
+        }
+
+        public ICommand GoToRegistration
+        {
+            get
+            {
+                return _goToRegistration ?? (_goToRegistration = new RelayCommand(x =>
+                {
+                    Mediator.Notify("GoToRegistrationScreen", "");
                 }));
             }
         }

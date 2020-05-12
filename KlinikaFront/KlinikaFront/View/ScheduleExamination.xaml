@@ -8,7 +8,7 @@
              d:DesignHeight="853" d:DesignWidth="480">
     <Grid>
         <StackPanel>
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480" Margin="0,20,0,0">
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480">
                 <Grid Height="80" Background="#FF49AAA1">
 
                     <Button HorizontalAlignment="Left" Margin="30,15,0,0" VerticalAlignment="Top" Width="50" Height="50" Background="{x:Null}" Command="{Binding GoToPrevious}">

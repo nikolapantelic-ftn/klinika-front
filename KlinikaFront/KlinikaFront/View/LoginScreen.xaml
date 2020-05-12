@@ -7,20 +7,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="853" d:DesignWidth="480">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="853" VerticalAlignment="Center" Width="480">
-            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480" Margin="0,20,0,0">
+        <StackPanel>
+            <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480">
                 <Grid Height="80" Background="#FF49AAA1">
                     <Label Content="Prijava na nalog" HorizontalAlignment="Left" Margin="10,15,0,15" Width="185" FontSize="24" VerticalContentAlignment="Center"/>
-                    <Button Content="KREIRAJ NALOG" HorizontalAlignment="Right" Width="212" Margin="0,10,10,10" Click="Button_Click" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E67D4"/>
+                    <Button Content="KREIRAJ NALOG" HorizontalAlignment="Right" Width="212" Margin="0,10,10,10" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E67D4" Command="{Binding GoToRegistration}"/>
 
                 </Grid>
             </Border>
-            <Label Content="Unesite vašu E-mail adresu i lozinku." Margin="0,150,0,0" Height="32" Width="480" FontSize="14" HorizontalContentAlignment="Center"/>
-            <TextBox Height="30" TextWrapping="Wrap" Margin="70,30,70,0" Text="E-Mail" FontSize="15" VerticalContentAlignment="Center"/>
-            <PasswordBox Height="30" Margin="70,30,70,0"/>
-            <Button Content="PRIJAVI SE" FontSize="15" Height="30" Margin="70,30,70,0" Command="{Binding Login}"/>
-            <Button Content="Zaboravljena lozinka" FontSize="13" Margin="70,10,70,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E67D4"/>
-            <CheckBox Content="Zapamti me" VerticalContentAlignment="Center" FontSize="15" Margin="70,30,70,0"/>
+            <Label Content="Unesite vašu E-mail adresu i lozinku." Margin="0,150,0,0" Height="32" Width="480" FontSize="20" HorizontalContentAlignment="Center"/>
+            <TextBox Height="40" TextWrapping="Wrap" Margin="70,30,70,0" Text="E-Mail" FontSize="20" VerticalContentAlignment="Center"/>
+            <PasswordBox FontSize="20" VerticalContentAlignment="Center" Height="40" Margin="70,30,70,0"/>
+            <Button Content="PRIJAVI SE" FontSize="20" Height="40" Margin="70,30,70,0" Command="{Binding Login}"/>
+            <Button Content="Zaboravljena lozinka" FontSize="15" Margin="70,10,70,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E67D4"/>
+            <CheckBox Content="Zapamti me" VerticalContentAlignment="Center" FontSize="20" Margin="70,30,70,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

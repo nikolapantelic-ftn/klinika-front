@@ -20,5 +20,11 @@
         <DataTemplate DataType="{x:Type viewmodel:ExaminationsViewModel}">
             <view:Examinations />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:Registration1ViewModel}">
+            <view:Registration1 />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:Registration2ViewModel}">
+            <view:Registration2 />
+        </DataTemplate>
     </Application.Resources>
 </Application>
