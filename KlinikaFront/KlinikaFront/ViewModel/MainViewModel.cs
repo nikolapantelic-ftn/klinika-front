@@ -13,8 +13,10 @@ namespace KlinikaFront.ViewModel
         private ICommand _goToIndex;
         private ICommand _toggleMenu;
         private ICommand _goToLogin;
-        private ICommand _goToScheduleExamination;
+        private ICommand _goToExaminationRecommendation;
         private ICommand _goToExaminations;
+        private ICommand _goToTherapies;
+        private ICommand _goToQuestions;
         public bool MenuOpened { get; set; } = false;
 
         public ICommand GoToIndex
@@ -52,13 +54,13 @@ namespace KlinikaFront.ViewModel
             }
         }
 
-        public ICommand GoToScheduleExamination
+        public ICommand GoToExaminationRecommendation
         {
             get
             {
-                return _goToScheduleExamination ?? (_goToScheduleExamination = new RelayCommand(x =>
+                return _goToExaminationRecommendation ?? (_goToExaminationRecommendation = new RelayCommand(x =>
                 {
-                    Mediator.Notify("GoToScheduleExaminationScreen", "");
+                    Mediator.Notify("GoToExaminationRecommendationScreen", "");
                     MenuOpened = false;
                 }));
             }
@@ -72,6 +74,29 @@ namespace KlinikaFront.ViewModel
                 {
                     Mediator.Notify("GoToExaminationsScreen", "");
                     MenuOpened = false;
+                }));
+            }
+        }
+
+        public ICommand GoToTherapies
+        {
+            get
+            {
+                return _goToTherapies ?? (_goToTherapies = new RelayCommand(x =>
+                {
+                    Mediator.Notify("GoToTherapiesScreen", "");
+                    MenuOpened = false;
+                }));
+            }
+        }
+
+        public ICommand GoToQuestions
+        {
+            get
+            {
+                return _goToQuestions ?? (_goToQuestions = new RelayCommand(x =>
+                {
+                    Mediator.Notify("GoToQuestionsScreen", "");
                 }));
             }
         }

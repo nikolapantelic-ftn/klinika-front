@@ -12,6 +12,8 @@ namespace KlinikaFront.ViewModel
     {
         private ICommand _login;
         private ICommand _goToRegistration;
+        public string Username { get; set; }
+        public string Password { get; set; }
 
         public ICommand Login
         {

@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>KlinikaFront</RootNamespace>
     <AssemblyName>KlinikaFront</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,8 +36,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Klinika">
+      <HintPath>..\..\..\..\Klinika\bin\Debug\Klinika.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,26 +63,42 @@
     <Compile Include="Utilities\EventRaiser.cs" />
     <Compile Include="Utilities\Mediator.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
+    <Compile Include="Validation\EmailValidationRule.cs" />
+    <Compile Include="Validation\JmbgValidationRule.cs" />
+    <Compile Include="Validation\NameValidationRule.cs" />
+    <Compile Include="Validation\PasswordValidationRule.cs" />
+    <Compile Include="Validation\UsernameValidationRule.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ExaminationRecommendationViewModel.cs" />
     <Compile Include="ViewModel\ExaminationsViewModel.cs" />
-    <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\IPageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\QuestionsViewModel.cs" />
     <Compile Include="ViewModel\RegistrationViewModel.cs" />
     <Compile Include="ViewModel\ScheduleExaminationViewModel.cs" />
+    <Compile Include="ViewModel\TherapiesViewModel.cs" />
+    <Compile Include="View\ExaminationItem.xaml.cs">
+      <DependentUpon>ExaminationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ExaminationRecommendation.xaml.cs">
+      <DependentUpon>ExaminationRecommendation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Examinations.xaml.cs">
       <DependentUpon>Examinations.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\Index.xaml.cs">
-      <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginScreen.xaml.cs">
       <DependentUpon>LoginScreen.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionItem.xaml.cs">
+      <DependentUpon>QuestionItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Questions.xaml.cs">
+      <DependentUpon>Questions.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Registration1.xaml.cs">
       <DependentUpon>Registration1.xaml</DependentUpon>
@@ -87,6 +108,9 @@
     </Compile>
     <Compile Include="View\ScheduleExamination.xaml.cs">
       <DependentUpon>ScheduleExamination.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Therapies.xaml.cs">
+      <DependentUpon>Therapies.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,11 +124,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\Examinations.xaml">
+    <Page Include="View\ExaminationItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Index.xaml">
+    <Page Include="View\ExaminationRecommendation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Examinations.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +141,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Questions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ScheduleExamination.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Therapies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,7 +196,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Resource Include="Resources\nexticon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\examicon.png" />

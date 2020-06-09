@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:KlinikaFront.View"
              mc:Ignorable="d" 
              d:DesignHeight="853" Width="480">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <StackPanel>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480">
@@ -14,12 +17,250 @@
                     <Button HorizontalAlignment="Left" Margin="30,15,0,0" VerticalAlignment="Top" Width="50" Height="50" Background="{x:Null}" Command="{Binding GoToPrevious}">
                         <Image Source="../Resources/backicon.png"/>
                     </Button>
-                    <Label Content="Zakazani pregledi" HorizontalAlignment="Center" Margin="15,15,15,15" FontSize="24"/>
+                    <StackPanel>
+                        <Label Content="Zakazani pregledi" HorizontalAlignment="Center" Margin="15" FontSize="24"/>
+                    </StackPanel>
                     <Button HorizontalAlignment="Right" Margin="0,15,30,0" VerticalAlignment="Top" Width="50" Height="50" Background="{x:Null}" Command="{Binding GoToPrevious}">
                         <Image Source="../Resources/searchicon.png"/>
                     </Button>
                 </Grid>
             </Border>
+            <Border Height="40" VerticalAlignment="Top" Width="480" Background="#FF49AAA1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Background="{x:Null}" BorderBrush="#FF49AAA1" Command="{Binding PreviousWeek}">
+                        <Image Source="../Resources/backicon.png"/>
+                    </Button>
+                    <Label Name="DateString" Grid.Column="1" Content="{Binding Path=WeekString}" HorizontalAlignment="Center" FontSize="20"/>
+                    <Button Grid.Column="2" Background="{x:Null}" BorderBrush="#FF49AAA1" Command="{Binding NextWeek}">
+                        <Image Source="../Resources/nexticon.png"/>
+                    </Button>
+                </Grid>
+            </Border>
+            <StackPanel>
+                <WrapPanel Visibility="{Binding DayNotEmpty[0], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Ponedeljak" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[0]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding MondayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room.Id}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <WrapPanel Visibility="{Binding DayNotEmpty[1], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Utorak" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[1]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding TuesdayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <WrapPanel Visibility="{Binding DayNotEmpty[2], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Sreda" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[2]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding WednesdayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <WrapPanel Visibility="{Binding DayNotEmpty[3], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Četvrtak" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[3]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding ThursdayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <WrapPanel Visibility="{Binding DayNotEmpty[4], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Petak" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[4]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding FridayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <WrapPanel Visibility="{Binding DayNotEmpty[5], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Subota" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[5]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding SaturdayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <WrapPanel Visibility="{Binding DayNotEmpty[6], Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Label Content="Nedelja" FontSize="25" VerticalContentAlignment="Center"/>
+                    <Label Content="{Binding Path=DayStrings[6]}" FontSize="25" VerticalContentAlignment="Center"/>
+                </WrapPanel>
+                <ItemsControl ItemsSource="{Binding SundayAppointments}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalContentAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="150"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel>
+                                        <Label Name="Hours" Content="{Binding Path=StartTime.Hour}" FontSize="40"/>
+                                        <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
+                                    </WrapPanel>
+                                    <StackPanel Grid.Column="1">
+                                        <Label Content="Sala: " FontSize="20"/>
+                                        <Label Name="Location" Content="{Binding Path=Room}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="2">
+                                        <Label Content="Sprat: " FontSize="20"/>
+                                        <Label Name="Floor" Content="{Binding Path=Room.Floor}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
         </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KlinikaFront.View"
+             xmlns:val="clr-namespace:KlinikaFront.Validation"
              mc:Ignorable="d" 
              d:DesignHeight="853" d:DesignWidth="480">
     <Grid>
@@ -15,9 +16,19 @@
 
                 </Grid>
             </Border>
-            <Label Content="Unesite vašu E-mail adresu i lozinku." Margin="0,150,0,0" Height="32" Width="480" FontSize="20" HorizontalContentAlignment="Center"/>
-            <TextBox Height="40" TextWrapping="Wrap" Margin="70,30,70,0" Text="E-Mail" FontSize="20" VerticalContentAlignment="Center"/>
-            <PasswordBox FontSize="20" VerticalContentAlignment="Center" Height="40" Margin="70,30,70,0"/>
+            <Label Content="Unesite vaše korisničko ime i lozinku." Margin="0,150,0,0" Height="32" Width="480" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Label Content="Korisničko ime:" Margin="70,30,70,0" FontSize="20"/>
+            <TextBox Height="40" TextWrapping="Wrap" Margin="70,0,70,0" FontSize="20" VerticalContentAlignment="Center">
+                <TextBox.Text>
+                    <Binding Path="Username" UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <val:EmailValidationRule ValidationStep="RawProposedValue"/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="Lozinka:" Margin="70,10,70,0" FontSize="20"/>
+            <PasswordBox FontSize="20" VerticalContentAlignment="Center" Height="40" Margin="70,0,70,0"/>
             <Button Content="PRIJAVI SE" FontSize="20" Height="40" Margin="70,30,70,0" Command="{Binding Login}"/>
             <Button Content="Zaboravljena lozinka" FontSize="15" Margin="70,10,70,0" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF3E67D4"/>
             <CheckBox Content="Zapamti me" VerticalContentAlignment="Center" FontSize="20" Margin="70,30,70,0"/>

@@ -5,9 +5,6 @@
              xmlns:viewmodel="clr-namespace:KlinikaFront.ViewModel"
              xmlns:view="clr-namespace:KlinikaFront.View">
     <Application.Resources>
-        <DataTemplate DataType="{x:Type viewmodel:IndexViewModel}">
-            <view:Index />
-        </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel:MainViewModel}">
             <view:Main />
         </DataTemplate>
@@ -25,6 +22,15 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewmodel:Registration2ViewModel}">
             <view:Registration2 />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:TherapiesViewModel}">
+            <view:Therapies/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ExaminationRecommendationViewModel}">
+            <view:ExaminationRecommendation/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:QuestionsViewModel}">
+            <view:Questions/>
         </DataTemplate>
     </Application.Resources>
 </Application>

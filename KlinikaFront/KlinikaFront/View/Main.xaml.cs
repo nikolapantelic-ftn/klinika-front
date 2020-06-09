@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using KlinikaFront.Utilities;
+using System.Windows.Controls;
 
 namespace KlinikaFront.View
 {
@@ -10,6 +11,11 @@ namespace KlinikaFront.View
         public Main()
         {
             InitializeComponent();
+        }
+
+        private void StackPanel_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
         }
     }
 }

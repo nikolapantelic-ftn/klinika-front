@@ -1,7 +1,10 @@
 ﻿using KlinikaFront.Utilities;
+using Model.Patient;
+using Model.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,7 +15,12 @@ namespace KlinikaFront.ViewModel
     {
         private ICommand _goToNextRegistration;
         private ICommand _goToLogin;
-
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public SecureString Password { get; set; }
+        public SecureString RepeatedPassword { get; set; }
         public ICommand GoToNextRegistration
         {
             get
@@ -40,6 +48,10 @@ namespace KlinikaFront.ViewModel
         private ICommand _goToPrevious;
         private ICommand _goToLogin;
         private ICommand _register;
+        public string Jmbg { get; set; }
+        public Sex Sex { get; set; }
+        public DateTime BirthDate { get; set; }
+        public Address Address { get; set; }
 
         public ICommand GoToPrevious
         {

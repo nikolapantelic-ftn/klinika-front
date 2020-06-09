@@ -48,24 +48,19 @@ namespace KlinikaFront.ViewModel
             CurrentPageViewModel = PageViewModels.FirstOrDefault(vm => vm == viewModel);
         }
 
-        private void OnGoToIndexScreen(object obj)
-        {
-            ChangeViewModel(PageViewModels[0]);
-        }
-
         private void OnGoToLoginScreen(object obj)
         {
-            ChangeViewModel(PageViewModels[2]);
+            ChangeViewModel(PageViewModels[1]);
         }
 
         private void OnGoToScheduleExaminationScreen(object obj)
         {
-            ChangeViewModel(PageViewModels[3]);
+            ChangeViewModel(PageViewModels[2]);
         }
 
         private void OnGoToExaminationsScreen(object obj)
         {
-            ChangeViewModel(PageViewModels[4]);
+            ChangeViewModel(PageViewModels[3]);
         }
 
         private void OnGoToPreviousScreen(object obj)
@@ -75,47 +70,72 @@ namespace KlinikaFront.ViewModel
 
         private void OnGoToRegistrationScreen(object obj)
         {
-            ChangeViewModel(PageViewModels[5]);
+            ChangeViewModel(PageViewModels[4]);
         }
 
         private void OnGoToNextRegistrationScreen(object obj)
         {
-            ChangeViewModel(PageViewModels[6]);
+            ChangeViewModel(PageViewModels[5]);
         }
 
         private void OnLogin(object obj)
         {
             //TO-DO: Logging in
-            ChangeViewModel(PageViewModels[1]);
+            ChangeViewModel(PageViewModels[0]);
         }
 
         private void OnRegister(object obj)
         {
             //TO-DO: Registering
-            ChangeViewModel(PageViewModels[1]);
+            ChangeViewModel(PageViewModels[0]);
+        }
+
+        private void OnGoToTherapiesScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[6]);
+        }
+        
+        private void OnGoToExaminationRecommendationScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[7]);
+        }
+
+        private void OnGoToMainScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[0]);
+        }
+
+        private void OnGoToQuestionsScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[8]);
         }
 
         public MainWindowViewModel()
         {
-            PageViewModels.Add(new IndexViewModel());
             PageViewModels.Add(new MainViewModel());
             PageViewModels.Add(new LoginViewModel());
             PageViewModels.Add(new ScheduleExaminationViewModel());
             PageViewModels.Add(new ExaminationsViewModel());
             PageViewModels.Add(new Registration1ViewModel());
             PageViewModels.Add(new Registration2ViewModel());
+            PageViewModels.Add(new TherapiesViewModel());
+            PageViewModels.Add(new ExaminationRecommendationViewModel());
+            PageViewModels.Add(new QuestionsViewModel());
 
-            CurrentPageViewModel = PageViewModels[0];
+            CurrentPageViewModel = PageViewModels[1];
 
-            Mediator.Subscribe("GoToIndexScreen", OnGoToIndexScreen);
             Mediator.Subscribe("GoToLoginScreen", OnGoToLoginScreen);
             Mediator.Subscribe("GoToPreviousScreen", OnGoToPreviousScreen);
             Mediator.Subscribe("GoToScheduleExaminationScreen", OnGoToScheduleExaminationScreen);
             Mediator.Subscribe("GoToExaminationsScreen", OnGoToExaminationsScreen);
             Mediator.Subscribe("GoToRegistrationScreen", OnGoToRegistrationScreen);
             Mediator.Subscribe("GoToNextRegistrationScreen", OnGoToNextRegistrationScreen);
+            Mediator.Subscribe("GoToTherapiesScreen", OnGoToTherapiesScreen);
             Mediator.Subscribe("Login", OnLogin);
             Mediator.Subscribe("Register", OnRegister);
+            Mediator.Subscribe("GoToExaminationRecommendationScreen", OnGoToExaminationRecommendationScreen);
+            Mediator.Subscribe("GoToMainScreen", OnGoToMainScreen);
+            Mediator.Subscribe("GoToQuestionsScreen", OnGoToQuestionsScreen);
 
         }
     }
