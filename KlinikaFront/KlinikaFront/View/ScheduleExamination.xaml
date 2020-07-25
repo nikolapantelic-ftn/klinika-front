@@ -20,25 +20,36 @@
                     <Label Content="Zakazivanje pregleda" HorizontalAlignment="Center" Margin="75,15,15,15" FontSize="24"/>
                 </Grid>
             </Border>
-            <Label Content="Prioritet mi je:" Margin="70,100,70,0" FontSize="15"/>
-            <Grid Margin="70,0,70,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <RadioButton FontSize="15" GroupName="priority" IsChecked="True" Name="doctor">Određeni lekar</RadioButton>
-                <RadioButton FontSize="15" GroupName="priority" Grid.Column="1" Name="date">Tačan datum</RadioButton>
-            </Grid>
-            <ComboBox Text="Izaberite lekara" IsEditable="True" IsReadOnly="True" Height="30" FontSize="15" Margin="70,30,70,0" Visibility="{Binding ElementName=doctor, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <DatePicker Height="30" FontSize="15" Margin="70,30,70,0"/>
-            <ComboBox Text="Izaberite lekara" IsEditable="True" IsReadOnly="True" Height="30" FontSize="15" Margin="70,30,70,0" Visibility="{Binding ElementName=date, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            <ComboBox Text="Izaberite termin" IsEditable="True" IsReadOnly="True" Height="30" FontSize="15" Margin="70,30,70,0"/>
+            <Label Content="Izaberite doktora:" Margin="70,30,70,0" FontSize="20"/>
+            <ComboBox Height="40" FontSize="20" Margin="70,0,70,0" ItemsSource="{Binding Path=Doctors}" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Path=LastName}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label Content="Izaberite datum:" Margin="70,30,70,0" FontSize="20"/>
+            <DatePicker Height="40" FontSize="20" Margin="70,0,70,0" SelectedDate="{Binding Path=StartDate}"/>
+            <Label Content="Izaberite termin:" Margin="70,30,70,0" FontSize="20"/>
+            <ComboBox Height="40" FontSize="15" Margin="70,0,70,0" ItemsSource="{Binding Path=Appointments}" SelectionChanged="ComboBox_SelectionChanged_1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Path=StartTime.TimeOfDay}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Content="ZAKAŽI" Height="30" FontSize="15" Margin="70,30,10,0"/>
+                <Button Content="ZAKAŽI" Height="30" FontSize="15" Margin="70,30,10,0" Command="{Binding Confirm}"/>
                 <Button Grid.Column="1" Content="ODUSTANI" Height="30" FontSize="15" Margin="10,30,70,0" Command="{Binding GoToMain}"/>
             </Grid>
         </StackPanel>

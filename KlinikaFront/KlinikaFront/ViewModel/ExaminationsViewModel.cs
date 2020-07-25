@@ -1,7 +1,9 @@
-﻿using KlinikaFront.Utilities;
+﻿using KlinikaFront.DB;
+using KlinikaFront.Utilities;
 using Model.Secretary;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace KlinikaFront.ViewModel
@@ -11,14 +13,16 @@ namespace KlinikaFront.ViewModel
         private ICommand _goToPrevious;
         private ICommand _previousWeek;
         private ICommand _nextWeek;
+        private ICommand _selectAppointment;
+        private ICommand _updateHelp;
 
-        public List<Appointment> MondayAppointments { get; set; } = new List<Appointment>();
-        public List<Appointment> TuesdayAppointments { get; set; } = new List<Appointment>();
-        public List<Appointment> WednesdayAppointments { get; set; } = new List<Appointment>();
-        public List<Appointment> ThursdayAppointments { get; set; } = new List<Appointment>();
-        public List<Appointment> FridayAppointments { get; set; } = new List<Appointment>();
-        public List<Appointment> SaturdayAppointments { get; set; } = new List<Appointment>();
-        public List<Appointment> SundayAppointments { get; set; } = new List<Appointment>();
+        public ObservableCollection<Appointment> MondayAppointments { get; set; } = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> TuesdayAppointments { get; set; } = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> WednesdayAppointments { get; set; } = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> ThursdayAppointments { get; set; } = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> FridayAppointments { get; set; } = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> SaturdayAppointments { get; set; } = new ObservableCollection<Appointment>();
+        public ObservableCollection<Appointment> SundayAppointments { get; set; } = new ObservableCollection<Appointment>();
         public bool[] DayNotEmpty { get; set; } = { false, false, false, false, false, false, false };
         public string WeekString { get; private set; }
         public DateTime StartOfWeek { get; private set; }
@@ -33,14 +37,6 @@ namespace KlinikaFront.ViewModel
             WeekString = StartOfWeek.ToString("dd.MM.") + " - " + StartOfWeek.AddDays(7).ToString("dd.MM.");
             PopulateWeek();
 
-
-
-            //Test vrednosti
-            MondayAppointments.Add(new Appointment(0, new DateTime(2020, 6, 1, 15, 20, 50), new DateTime(), AppointmentType.examination, null, null, null));
-            DayNotEmpty[0] = true;
-            SaturdayAppointments.Add(new Appointment(0, new DateTime(2020, 6, 1, 8, 30, 50), new DateTime(), AppointmentType.examination, null, null, null));
-            SaturdayAppointments.Add(new Appointment(0, new DateTime(2020, 6, 1, 10, 30, 50), new DateTime(), AppointmentType.examination, null, null, null));
-            DayNotEmpty[5] = true;
         }
 
         private void PopulateWeek()
@@ -52,8 +48,62 @@ namespace KlinikaFront.ViewModel
                 DateTime dayOfWeek = StartOfWeek.AddDays(i);
                 DaysOfWeek.Add(dayOfWeek);
                 DayStrings.Add(dayOfWeek.ToString("dd.MM.yyyy"));
+                DayNotEmpty[i] = false;
             }
             OnPropertyChanged("DayStrings");
+            MondayAppointments = new ObservableCollection<Appointment>();
+            TuesdayAppointments = new ObservableCollection<Appointment>();
+            WednesdayAppointments = new ObservableCollection<Appointment>();
+            ThursdayAppointments = new ObservableCollection<Appointment>();
+            FridayAppointments = new ObservableCollection<Appointment>();
+            SaturdayAppointments = new ObservableCollection<Appointment>();
+            SundayAppointments = new ObservableCollection<Appointment>();
+            foreach (Appointment a in AppointmentsDB.Instance.Appointments)
+            {
+                if (a.StartTime.Date == DaysOfWeek[0].Date)
+                {
+                    MondayAppointments.Add(a);
+                    DayNotEmpty[0] = true;
+                }
+                else if (a.StartTime.Date == DaysOfWeek[1].Date)
+                {
+                    TuesdayAppointments.Add(a);
+                    DayNotEmpty[1] = true;
+                }
+                else if (a.StartTime.Date == DaysOfWeek[2].Date)
+                {
+                    WednesdayAppointments.Add(a);
+                    DayNotEmpty[2] = true;
+                }
+                else if (a.StartTime.Date == DaysOfWeek[3].Date)
+                {
+                    ThursdayAppointments.Add(a);
+                    DayNotEmpty[3] = true;
+                }
+                else if (a.StartTime.Date == DaysOfWeek[4].Date)
+                {
+                    FridayAppointments.Add(a);
+                    DayNotEmpty[4] = true;
+                }
+                else if (a.StartTime.Date == DaysOfWeek[5].Date)
+                {
+                    SaturdayAppointments.Add(a);
+                    DayNotEmpty[5] = true;
+                }
+                else if (a.StartTime.Date == DaysOfWeek[6].Date)
+                {
+                    SundayAppointments.Add(a);
+                    DayNotEmpty[6] = true;
+                }
+                OnPropertyChanged("SundayAppointments");
+                OnPropertyChanged("SaturdayAppointments");
+                OnPropertyChanged("FridayAppointments");
+                OnPropertyChanged("ThursdayAppointments");
+                OnPropertyChanged("WednesdayAppointments");
+                OnPropertyChanged("TuesdayAppointments");
+                OnPropertyChanged("MondayAppointments");
+                OnPropertyChanged("DayNotEmpty");
+            }
         }
 
         public ICommand GoToPrevious
@@ -62,7 +112,7 @@ namespace KlinikaFront.ViewModel
             {
                 return _goToPrevious ?? (_goToPrevious = new RelayCommand(x =>
                 {
-                    Mediator.Notify("GoToPreviousScreen", "");
+                    Mediator.Notify("GoToMainScreen", "");
                 }));
             }
         }
@@ -93,6 +143,42 @@ namespace KlinikaFront.ViewModel
                     PopulateWeek();
                 }));
             }
+        }
+
+        public ICommand SelectAppointment
+        {
+            get
+            {
+                return _selectAppointment ?? (_selectAppointment = new RelayCommand<Appointment>(OnSelectAppointment, null));
+            }
+        }
+
+        public ICommand UpdateHelp
+        {
+            get
+            {
+                return _updateHelp ?? (_updateHelp = new RelayCommand(x =>
+                {
+                    PageHelp = false;
+                    OnPropertyChanged("ShowHelp");
+                }));
+            }
+        }
+
+        public bool PageHelp { get; set; } = true;
+        public bool ShowHelp
+        {
+            get
+            {
+                return PageHelp && Config.Instance.HelpEnabled;
+            }
+        }
+
+
+        private void OnSelectAppointment(Appointment appointment)
+        {
+            AppointmentsDB.Instance.Selected = appointment;
+            Mediator.Notify("GoToExaminationView", "");
         }
     }
 }

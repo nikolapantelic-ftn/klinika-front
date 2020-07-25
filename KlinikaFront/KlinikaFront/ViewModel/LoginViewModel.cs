@@ -1,4 +1,6 @@
-﻿using KlinikaFront.Utilities;
+﻿using Controller.Users;
+using KlinikaFront.User;
+using KlinikaFront.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,14 @@ namespace KlinikaFront.ViewModel
             {
                 return _login ?? (_login = new RelayCommand(x =>
                 {
-                    Mediator.Notify("Login", "");
+                    PatientController controller = new PatientController();
+                    CurrentUser.Instance.Patient = controller.LoginPatient(Username, Password);
+                    if(CurrentUser.Instance.Patient != null)
+                    {
+                        Username = "";
+                        Password = "";
+                        Mediator.Notify("Login", "");
+                    }
                 }));
             }
         }

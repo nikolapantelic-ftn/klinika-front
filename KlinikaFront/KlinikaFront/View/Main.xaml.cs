@@ -1,4 +1,5 @@
 ﻿using KlinikaFront.Utilities;
+using KlinikaFront.ViewModel;
 using System.Windows.Controls;
 
 namespace KlinikaFront.View
@@ -15,7 +16,11 @@ namespace KlinikaFront.View
 
         private void StackPanel_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            
+            if(DataContext != null)
+            {
+                ((MainViewModel)DataContext).PageHelp = false;
+                ((MainViewModel)DataContext).UpdateHelp.Execute(null);
+            }
         }
     }
 }

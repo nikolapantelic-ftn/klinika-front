@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
+    <Canvas>
     <Grid>
         <StackPanel>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480">
@@ -20,46 +21,71 @@
                     <Label Content="Nalazak termina" HorizontalAlignment="Center" Margin="75,15,15,15" FontSize="24"/>
                 </Grid>
             </Border>
-            <ComboBox Text="Izaberite lekara" IsEditable="True" IsReadOnly="True" Height="30" FontSize="15" Margin="70,100,70,0"/>
+            <Label Content="Doktor:" Margin="70,30,70,0" FontSize="20"/>
+            <ComboBox Height="40" FontSize="20" Margin="70,0,70,0" ItemsSource="{Binding Path=Doctors}" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Path=LastName}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <DatePicker Height="30" FontSize="15" Margin="70,30,0,0"/>
-                <DatePicker Height="30" FontSize="15" Grid.Column="1" Margin="0,30,70,0"/>
+                <StackPanel Margin="70,30,0,0">
+                    <Label Content="Početni datum:" FontSize="20"/>
+                    <DatePicker Height="40" FontSize="20" SelectedDate="{Binding Path=StartDate}"/>
+                </StackPanel>
+                <StackPanel  Margin="0,30,70,0" Grid.Column="1">
+                    <Label Content="Krajnji datum:" FontSize="20"/>
+                    <DatePicker Height="40" FontSize="20"  SelectedDate="{Binding Path=EndDate}"/>
+                </StackPanel>
             </Grid>
-            <Label Content="Bitniji mi je:" Margin="70,30,70,0" FontSize="15"/>
+            <Label Content="Bitniji mi je:" Margin="70,30,70,0" FontSize="20"/>
             <Grid Margin="70,0,70,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <RadioButton FontSize="15" GroupName="priority" IsChecked="True" Name="doctor">Izabrani lekar</RadioButton>
-                <RadioButton FontSize="15" GroupName="priority" Grid.Column="1" Name="date">Tačan datum</RadioButton>
+                <RadioButton FontSize="20" GroupName="priority" IsChecked="True" Name="doctor">Izabrani lekar</RadioButton>
+                <RadioButton FontSize="20" GroupName="priority" Grid.Column="1" Name="date">Tačan datum</RadioButton>
             </Grid>
-            <Button Margin="70,30,70,0" Content="Nadji termin" Height="30" Command="{Binding FindAppointment}"/>
+            <Button Margin="70,30,70,0" Content="Nadji termin" Height="40" Command="{Binding FindAppointment}"/>
             <StackPanel Name="AppointmentView" Margin="70,0,70,0" Visibility="{Binding ShowAppointment, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <Label Content="Termin:" FontSize="20" HorizontalAlignment="Center"/>
                 <WrapPanel HorizontalAlignment="Center">
-                    <Label Name="Dayofweek" Content="Nedelja" FontSize="30"/>
-                    <Label Name="Date" Content="12.15.1222." FontSize="30"/>
+                    <Label Name="Dayofweek" Content="{Binding Path=DayOfWeek}" FontSize="30"/>
+                    <Label Name="Date" Content="{Binding Path=ShortDate}" FontSize="30"/>
                 </WrapPanel>
                 <WrapPanel HorizontalAlignment="Center">
                     <Label Content="u" FontSize="30"/>
-                    <Label Name="Time" Content="12:15" FontSize="30"/>
+                    <Label Name="Time" Content="{Binding Path=Time}" FontSize="30"/>
                 </WrapPanel>
                 <Label Content="Kod lekara:" FontSize="20" HorizontalAlignment="Center"/>
-                <Label Name="Doctor" Content="Dr. Nikola Pantelic" FontSize="30" HorizontalAlignment="Center"/>
+                <WrapPanel HorizontalAlignment="Center">
+                    <Label Content="Dr." FontSize="30" />
+                    <Label FontSize="30" HorizontalAlignment="Center" Content="{Binding Path=RecommendedAppointment.Doctor.Name}"/>
+                    <Label FontSize="30" HorizontalAlignment="Center" Content="{Binding Path=RecommendedAppointment.Doctor.LastName}"/>
+                </WrapPanel>
                 <Grid Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Height="30" Margin="0,0,15,0" Content="Potvrdi"/>
-                    <Button Height="30" Grid.Column="1" Margin="15,0,0,0" Content="Ručno zakazivanje" Command="{Binding GoToScheduleExamination}"/>
+                    <Button Height="40" Margin="0,0,15,0" Content="Potvrdi" Command="{Binding Confirm}"/>
+                    <Button Height="40" Grid.Column="1" Margin="15,0,0,0" Content="Ručno zakazivanje" Command="{Binding GoToScheduleExamination}"/>
                 </Grid>
             </StackPanel>
         </StackPanel> 
     </Grid>
+        <Canvas>
+            
+        </Canvas>
+    </Canvas>
 </UserControl>

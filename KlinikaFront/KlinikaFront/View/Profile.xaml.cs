@@ -16,26 +16,13 @@ using System.Windows.Shapes;
 namespace KlinikaFront.View
 {
     /// <summary>
-    /// Interaction logic for LoginScreen.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class LoginScreen : UserControl
+    public partial class Profile : UserControl
     {
-        public LoginScreen()
+        public Profile()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if(DataContext != null)
-            {
-                ((dynamic)DataContext).Password = ((PasswordBox)sender).Password;
-            }
         }
     }
 }

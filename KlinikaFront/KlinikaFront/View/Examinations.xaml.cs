@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KlinikaFront.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace KlinikaFront.View
         public Examinations()
         {
             InitializeComponent();
+        }
+
+        private void Canvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                ((ExaminationsViewModel)DataContext).PageHelp = false;
+                ((ExaminationsViewModel)DataContext).UpdateHelp.Execute(null);
+            }
         }
     }
 }

@@ -20,7 +20,7 @@
             <Label Content="Ime:" Margin="70,10,70,0" FontSize="20"/>
             <TextBox  Height="40" TextWrapping="Wrap" Margin="70,0,70,0" FontSize="20" VerticalContentAlignment="Center">
                 <TextBox.Text>
-                    <Binding Path="Name" UpdateSourceTrigger="LostFocus">
+                    <Binding Path="RegisterUserDTO.Name" UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <val:NameValidationRule ValidationStep="RawProposedValue" Field="Ime"/>
                         </Binding.ValidationRules>
@@ -30,7 +30,7 @@
             <Label Content="Prezime:" Margin="70,10,70,0" FontSize="20"/>
             <TextBox  Height="40" TextWrapping="Wrap" Margin="70,0,70,0" FontSize="20" VerticalContentAlignment="Center">
                 <TextBox.Text>
-                    <Binding Path="LastName" UpdateSourceTrigger="LostFocus">
+                    <Binding Path="RegisterUserDTO.LastName" UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <val:NameValidationRule ValidationStep="RawProposedValue" Field="Prezime"/>
                         </Binding.ValidationRules>
@@ -40,7 +40,7 @@
             <Label Content="E-mail adresa:" Margin="70,10,70,0" FontSize="20"/>
             <TextBox  Height="40" TextWrapping="Wrap" Margin="70,0,70,0" FontSize="20" VerticalContentAlignment="Center">
                 <TextBox.Text>
-                    <Binding Path="Email" UpdateSourceTrigger="LostFocus">
+                    <Binding Path="RegisterUserDTO.Email" UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <val:EmailValidationRule ValidationStep="RawProposedValue"/>
                         </Binding.ValidationRules>
@@ -50,7 +50,7 @@
             <Label Content="Korisničko ime:" Margin="70,10,70,0" FontSize="20"/>
             <TextBox  Height="40" TextWrapping="Wrap" Margin="70,0,70,0" FontSize="20" VerticalContentAlignment="Center">
                 <TextBox.Text>
-                    <Binding Path="Username" UpdateSourceTrigger="LostFocus">
+                    <Binding Path="RegisterUserDTO.Username" UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
                             <val:UsernameValidationRule ValidationStep="RawProposedValue"/>
                         </Binding.ValidationRules>

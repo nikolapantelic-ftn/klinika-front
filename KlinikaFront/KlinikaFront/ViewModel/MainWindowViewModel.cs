@@ -60,6 +60,7 @@ namespace KlinikaFront.ViewModel
 
         private void OnGoToExaminationsScreen(object obj)
         {
+            PageViewModels[3] = new ExaminationsViewModel();
             ChangeViewModel(PageViewModels[3]);
         }
 
@@ -80,13 +81,11 @@ namespace KlinikaFront.ViewModel
 
         private void OnLogin(object obj)
         {
-            //TO-DO: Logging in
             ChangeViewModel(PageViewModels[0]);
         }
 
         private void OnRegister(object obj)
         {
-            //TO-DO: Registering
             ChangeViewModel(PageViewModels[0]);
         }
 
@@ -110,6 +109,16 @@ namespace KlinikaFront.ViewModel
             ChangeViewModel(PageViewModels[8]);
         }
 
+        private void OnGoToProfileScreen(object obj)
+        {
+            ChangeViewModel(PageViewModels[9]);
+        }
+
+        private void OnGoToExaminationViewScreen(object obj)
+        {
+            ChangeViewModel(new ExaminationViewViewModel());
+        }
+
         public MainWindowViewModel()
         {
             PageViewModels.Add(new MainViewModel());
@@ -121,6 +130,7 @@ namespace KlinikaFront.ViewModel
             PageViewModels.Add(new TherapiesViewModel());
             PageViewModels.Add(new ExaminationRecommendationViewModel());
             PageViewModels.Add(new QuestionsViewModel());
+            PageViewModels.Add(new ProfileViewModel());
 
             CurrentPageViewModel = PageViewModels[1];
 
@@ -136,6 +146,8 @@ namespace KlinikaFront.ViewModel
             Mediator.Subscribe("GoToExaminationRecommendationScreen", OnGoToExaminationRecommendationScreen);
             Mediator.Subscribe("GoToMainScreen", OnGoToMainScreen);
             Mediator.Subscribe("GoToQuestionsScreen", OnGoToQuestionsScreen);
+            Mediator.Subscribe("GoToProfileScreen", OnGoToProfileScreen);
+            Mediator.Subscribe("GoToExaminationView", OnGoToExaminationViewScreen);
 
         }
     }

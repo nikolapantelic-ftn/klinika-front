@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KlinikaFront.ViewModel;
+using Model.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,26 @@ namespace KlinikaFront.View
         public Registration2()
         {
             InitializeComponent();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext == null) return;
+            ((Registration2ViewModel)DataContext).SelectedCountry = (Country)((ComboBox)sender).SelectedItem;
+            ((Registration2ViewModel)DataContext).UpdateMunicipalities.Execute(null);
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext == null) return;
+            ((Registration2ViewModel)DataContext).SelectedMunicipality = (Municipality)((ComboBox)sender).SelectedItem;
+            ((Registration2ViewModel)DataContext).UpdateCities.Execute(null);
+        }
+
+        private void ComboBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext == null) return;
+            ((Registration2ViewModel)DataContext).SelectedCity = (City)((ComboBox)sender).SelectedItem;
         }
     }
 }

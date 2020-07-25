@@ -39,9 +39,9 @@ namespace KlinikaFront.ViewModel
             Treatments = new List<MedicalTreatment>();
             Operations = new List<Appointment>();
             Prescriptions = new List<MedicalPrescription>();
-            Treatments.Add(new MedicalTreatment("Previjanje","Note"));
-            Operations.Add(new Appointment(0, DateTime.Now, DateTime.Now, AppointmentType.operation, new Room(), null, null));
-            Prescriptions.Add(new MedicalPrescription(new List<Medicine>(), "Svaki dan"));
+            Treatments.Add(new MedicalTreatment("Previjanje","Nema napomena"));
+            Operations.Add(new Appointment(0, DateTime.Now, DateTime.Now.AddDays(7), AppointmentType.operation, new Room(), new Doctor(new Model.User.User("123456", "Marko", "Markovic", "", "", "", DateTime.Now, null, null)), null));
+            //Prescriptions.Add(new MedicalPrescription(new List<Medicine>(), "Svaki dan"));
 
         }
 

@@ -32,5 +32,11 @@
         <DataTemplate DataType="{x:Type viewmodel:QuestionsViewModel}">
             <view:Questions/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ProfileViewModel}">
+            <view:Profile/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodel:ExaminationViewViewModel}">
+            <view:ExaminationView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

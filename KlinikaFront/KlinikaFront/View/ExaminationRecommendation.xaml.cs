@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KlinikaFront.ViewModel;
+using Model.Doctor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,14 @@ namespace KlinikaFront.View
         public ExaminationRecommendation()
         {
             InitializeComponent();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                ((ExaminationRecommendationViewModel)DataContext).SelectedDoctor = (Doctor)((ComboBox)sender).SelectedItem;
+            }
         }
     }
 }

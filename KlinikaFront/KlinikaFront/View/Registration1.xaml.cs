@@ -27,9 +27,9 @@ namespace KlinikaFront.View
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            if(DataContext != null)
+            if (DataContext != null)
             {
-                ((dynamic)DataContext).Password = ((PasswordBox)sender).SecurePassword;
+                ((dynamic)DataContext).Password = ((PasswordBox)sender).Password;
             }
         }
 
@@ -37,13 +37,13 @@ namespace KlinikaFront.View
         {
             if (DataContext != null)
             {
-                ((dynamic)DataContext).RepeatedPassword = ((PasswordBox)sender).SecurePassword;
+                ((dynamic)DataContext).RepeatedPassword = ((PasswordBox)sender).Password;
             }
         }
 
         private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            if(((PasswordBox)sender).Password.Length < 8)
+            if (((PasswordBox)sender).Password.Length < 8)
             {
                 Console.WriteLine("Kratka sifra");
             }

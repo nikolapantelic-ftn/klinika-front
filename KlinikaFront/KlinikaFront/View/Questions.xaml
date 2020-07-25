@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:KlinikaFront.View"
              mc:Ignorable="d" 
              d:DesignHeight="853" Width="480">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
+        
         <StackPanel>
             <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top" Width="480">
                 <Grid Height="80" Background="#FF49AAA1">
@@ -17,14 +21,53 @@
                     <Label Content="Pitanja" HorizontalAlignment="Center" Margin="75,15,15,15" FontSize="24"/>
                 </Grid>
             </Border>
-            <TextBox Height="40" TextWrapping="Wrap" Margin="70,30,70,0" Text="Naslov" FontSize="20" VerticalContentAlignment="Center"/>
-            <TextBox Height="200" Margin="70,30,70,0" Text="Sadržaj" FontSize="20"/>
-            <Button Content="Postavi Pitanje" Height="40" Margin="70,30,70,0"/>
+            <ScrollViewer Height="770" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+            <Label Content="Naslov:" Margin="70,30,70,0" FontSize="20"/>
+            <TextBox Height="40" TextWrapping="Wrap" Margin="70,0,70,0" FontSize="20" VerticalContentAlignment="Center" Text="{Binding Path=Title}"/>
+            <Label Content="Sadržaj:" Margin="70,10,70,0" FontSize="20"/>
+            <TextBox Height="200" Margin="70,0,70,0" FontSize="20" Text="{Binding Path=Content}"/>
+            <Label Content="Izaberite doktora:" Margin="70,10,70,0" FontSize="20"/>
+            <ComboBox Height="40" Margin="70,0,70,0" FontSize="20" ItemsSource="{Binding Path=Doctors}" SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding Path=Name}"/>
+                            <TextBlock Text=" "/>
+                            <TextBlock Text="{Binding Path=LastName}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Button Content="Postavi pitanje" Height="40" FontSize="20" Margin="70,30,70,0" Command="{Binding SubmitQuestion}"/>
             <Border Height="50" Margin="0,30,0,0">
                 <Label Content="Moja pitanja" FontSize="25" VerticalContentAlignment="Center" BorderBrush="Black" BorderThickness="1"/>
             </Border>
-            <StackPanel Name="QuestionList"/>
-            <Label Content="Trenutno nemate postavljenih pitanja" HorizontalAlignment="Center" Margin="30"/>
+            
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding Path=Questions}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button HorizontalAlignment="Left">
+                                <Grid Width="475">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="{Binding Path=Title}"/>
+                                    <Label Grid.Column="1" Content="{Binding Path=Doctor.Name}"/>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+            
+            <Label Content="Trenutno nemate postavljenih pitanja" HorizontalAlignment="Center" Margin="30" Visibility="{Binding MessageVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+            
+
     </Grid>
 </UserControl>

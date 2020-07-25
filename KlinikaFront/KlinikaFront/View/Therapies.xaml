@@ -144,7 +144,7 @@
                             <Button HorizontalContentAlignment="Left">
                                 <Grid Width="475">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="90"/>
                                         <ColumnDefinition Width="150"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
@@ -153,12 +153,13 @@
                                         <Label Name="Minutes" Content="{Binding Path=StartTime.Minute}" HorizontalAlignment="Left" FontSize="20"/>
                                     </WrapPanel>
                                     <StackPanel Grid.Column="1">
-                                        <Label Content="" FontSize="20"/>
-                                        <Label Content="{Binding Path=StartTime}"/>
+                                        <Label Content="{Binding Path=StartTime.DayOfWeek}" FontSize="20"/>
+                                        <Label Content="{Binding Path=StartTime.Date}" FontSize="20"/>
                                     </StackPanel>
-                                    <WrapPanel Grid.Column="2">
-                                        <Label Content="{Binding Path=ReferralLetter.Specialist.Name}" FontSize="20"/>
-                                        <Label Content="{Binding Path=ReferralLetter.Specialist.LastName}" FontSize="20"/>
+                                    <WrapPanel Grid.Column="2" VerticalAlignment="Center">
+                                        <Label Content="Dr." FontSize="20"/>
+                                        <Label Content="{Binding Path=Doctor.Name}" FontSize="20"/>
+                                        <Label Content="{Binding Path=Doctor.LastName}" FontSize="20"/>
                                     </WrapPanel>
                                 </Grid>
                             </Button>

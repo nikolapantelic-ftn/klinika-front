@@ -1,4 +1,7 @@
-﻿using System;
+﻿using KlinikaFront.ViewModel;
+using Model.Doctor;
+using Model.Secretary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,23 @@ namespace KlinikaFront.View
         public ScheduleExamination()
         {
             InitializeComponent();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                ((ScheduleExaminationViewModel)DataContext).SelectedDoctor = (Doctor)((ComboBox)sender).SelectedItem;
+                ((ScheduleExaminationViewModel)DataContext).DoctorPropertyChanged();
+            }
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataContext != null)
+            {
+                ((ScheduleExaminationViewModel)DataContext).SelectedAppointment = (Appointment)((ComboBox)sender).SelectedItem;
+            }
         }
     }
 }

@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using KlinikaFront.User;
+using Model.Patient;
+using KlinikaFront.DB;
 
 namespace KlinikaFront.ViewModel
 {
@@ -17,8 +20,46 @@ namespace KlinikaFront.ViewModel
         private ICommand _goToExaminations;
         private ICommand _goToTherapies;
         private ICommand _goToQuestions;
+        private ICommand _goToProfile;
+        private ICommand _updateHelp;
+        private ICommand _toggleHelp;
+        public bool ShowHelp
+        {
+            get
+            {
+                return PageHelp && HelpEnabled;
+            }
+        }
+        public bool PageHelp { get; set; } = true;
+        public bool HelpEnabled
+        {
+            get
+            {
+                return Config.Instance.HelpEnabled;
+            }
+            set
+            {
+                Config.Instance.HelpEnabled = value;
+            }
+        }
+        public ICommand UpdateHelp
+        {
+            get
+            {
+                return _updateHelp ?? (_updateHelp = new RelayCommand(x =>
+                {
+                    OnPropertyChanged("ShowHelp");
+                }));
+            }
+        }
         public bool MenuOpened { get; set; } = false;
-
+        public Patient User
+        {
+            get
+            {
+                return CurrentUser.Instance.Patient;
+            }
+        }
         public ICommand GoToIndex
         {
             get
@@ -26,6 +67,18 @@ namespace KlinikaFront.ViewModel
                 return _goToIndex ?? (_goToIndex = new RelayCommand(x =>
                 {
                     Mediator.Notify("GoToIndexScreen", "");
+                    MenuOpened = false;
+                }));
+            }
+        }
+
+        public ICommand GoToProfile
+        {
+            get
+            {
+                return _goToProfile ?? (_goToProfile = new RelayCommand(x =>
+                {
+                    Mediator.Notify("GoToProfileScreen", "");
                     MenuOpened = false;
                 }));
             }
@@ -49,6 +102,7 @@ namespace KlinikaFront.ViewModel
                 return _goToLogin ?? (_goToLogin = new RelayCommand(x =>
                 {
                     Mediator.Notify("GoToLoginScreen", "");
+                    CurrentUser.Instance.Patient = null;
                     MenuOpened = false;
                 }));
             }
@@ -105,6 +159,18 @@ namespace KlinikaFront.ViewModel
         {
             MenuOpened = !MenuOpened;
             OnPropertyChanged("MenuOpened");
+        }
+
+        public ICommand ToggleHelp
+        {
+            get
+            {
+                return _toggleHelp ?? (_toggleHelp = new RelayCommand(x =>
+                {
+                    HelpEnabled = !HelpEnabled;
+                    OnPropertyChanged("HelpEnabled");
+                }));
+            }
         }
 
         public MainViewModel()
